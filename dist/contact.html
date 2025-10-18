@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Contact — HW CompareTech</title><link rel="icon" href="/favicon.svg" type="image/svg+xml"/></head>
+<body style="font-family:system-ui;padding:20px;background:#f8fafc;color:#0f172a">
+  <div style="max-width:700px;margin:0 auto;background:#fff;padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,42,.04)">
+    <h2>Contact HW CompareTech</h2>
+    <p>If you prefer email, this will open your mail client. For reliable delivery, configure a form service (Formspree) or Vercel Forms.</p>
+    <form id="contactForm" action="mailto:hersheweiss5@gmail.com" method="POST" enctype="text/plain" onsubmit="onSubmit(event)">
+      <label style="display:block;margin-top:8px">Name<input name="name" style="width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid #e6eef6"/></label>
+      <label style="display:block;margin-top:8px">Email<input name="email" type="email" style="width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid #e6eef6"/></label>
+      <label style="display:block;margin-top:8px">Message<textarea name="message" rows="6" style="width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid #e6eef6"></textarea></label>
+      <div style="margin-top:12px;display:flex;gap:8px"><button class="btn" type="submit">Send</button><button type="button" onclick="onCancel()" style="padding:8px;border-radius:6px;border:1px solid #e6eef6">Cancel</button></div>
+      <div id="status" style="margin-top:8px;font-size:13px;color:#475569"></div>
+    </form>
+  </div>
+<script>
+function onSubmit(e){
+  try{
+    var form = document.getElementById('contactForm');
+    var data = {name: form.name.value, email: form.email.value, message: form.message.value, ts: new Date().toISOString()};
+    var arr = JSON.parse(localStorage.getItem('hw_contacts')||'[]'); arr.push(data); localStorage.setItem('hw_contacts', JSON.stringify(arr));
+    document.getElementById('status').innerText = 'Local backup saved. Your mail client should open.';
+  }catch(e){}
+}
+function onCancel(){ window.location.href = '/'; }
+</script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>HW CompareTech</title>
+<meta name="description" content="HW CompareTech — Smart product comparisons for tech shoppers." />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<style>
+:root { --hw-orange: #FF6A00; --hw-green: #27A844; }
+body{font-family:system-ui,Arial,Helvetica,sans-serif;margin:0;background:#f8fafc;color:#0f172a}
+.header{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.container{max-width:1100px;margin:0 auto;padding:20px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo img{width:56px;height:56px}
+.hero{display:flex;gap:24px;align-items:center;padding:28px 0}
+.card{background:#fff;padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+.btn{background:var(--hw-orange);color:#fff;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+.small-btn{background:var(--hw-green);color:#fff;padding:6px 10px;border-radius:6px;border:none;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+.product img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+.footer{background:#0f172a;color:#fff;padding:24px;margin-top:28px;text-align:center}
+.cookie-banner{position:fixed;right:16px;bottom:16px;background:#fff;padding:12px;border-radius:10px;box-shadow:0 6px 24px rgba(2,6,23,.2);max-width:360px}
+.export-panel{position:fixed;left:16px;bottom:16px;background:#fff;padding:10px;border-radius:10px;box-shadow:0 6px 24px rgba(2,6,23,.08)}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <div class="logo"><img src="/hw-logo.svg" alt="HW CompareTech logo"/><div><h1 style="margin:0">HW CompareTech</h1><div style="font-size:13px;color:#6b7280">Smart product comparisons</div></div></div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div style="flex:1">
+      <h2 style="margin:0 0 8px 0">Find, compare, and buy tech you’ll love</h2>
+      <p style="margin:0 0 12px 0;color:#475569">Use the Smart Picker to find top matches for your budget and use case.</p>
+
+      <div class="card">
+        <div style="display:flex;gap:8px;align-items:center">
+          <input id="budget" placeholder="Budget e.g. 500-1500" style="flex:1;padding:8px;border-radius:8px;border:1px solid #e6eef6"/>
+          <select id="usecase" style="padding:8px;border-radius:8px;border:1px solid #e6eef6">
+            <option value="general">General</option>
+            <option value="gaming">Gaming</option>
+            <option value="video">Video</option>
+            <option value="photo">Photography</option>
+            <option value="battery">Battery life</option>
+          </select>
+          <button class="btn" id="findBtn">Find matches</button>
+        </div>
+        <div id="pickerResults" style="margin-top:12px"></div>
+      </div>
+    </div>
+    <div style="width:320px">
+      <div class="card">
+        <h4 style="margin:0 0 8px 0">Top picks</h4>
+        <ul id="topPicks" style="padding-left:18px;margin:0;color:#334155"></ul>
+      </div>
+      <div class="card" style="margin-top:12px">
+        <h4 style="margin:0 0 8px 0">Quick actions</h4>
+        <button class="small-btn" id="exportClicks">Export click log</button>
+        <a href="/contact.html" style="display:inline-block;margin-top:8px;text-decoration:none"><button style="margin-top:6px" class="btn">Contact Us</button></a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Products</h3>
+    <div class="grid" id="productsGrid"></div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div>HW CompareTech — Trusted product comparisons</div>
+  <div style="font-size:12px;margin-top:8px;color:rgba(255,255,255,0.8)">Affiliate disclosure: this site uses affiliate links. We may earn a commission for purchases made through links.</div>
+</footer>
+
+<div id="cookieBanner" class="cookie-banner" style="display:none">
+  <div style="font-size:14px;margin-bottom:8px">HW CompareTech uses cookies and analytics. Accept to enable analytics.</div>
+  <div style="display:flex;gap:8px;justify-content:flex-end">
+    <button id="rejectCookies" style="padding:6px 10px;border-radius:8px;border:1px solid #e6edf3;background:#fff">Reject</button>
+    <button id="acceptCookies" class="small-btn">Accept</button>
+  </div>
+</div>
+
+<div class="export-panel">
+  <div style="font-size:12px;color:#334155;margin-bottom:6px">Local click log</div>
+  <div style="font-size:12px;color:#64748b">Clicks are stored in your browser and can be exported.</div>
+</div>
+
+<script>
+const PRODUCTS = [
+  {id: 'p1', title: 'MacBook Air (M2)', price: '$1199', img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&q=80', excerpt: 'Thin, light, M2 performance.'},
+  {id: 'p2', title: 'Apple iPhone 15 Pro', price: '$999', img: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=1200&q=80', excerpt: 'Pro camera system and fast chip.'},
+  {id: 'p3', title: 'PlayStation 5', price: '$499', img: 'https://images.unsplash.com/photo-1606813902868-5f3b2b9bb7f6?w=1200&q=80', excerpt: 'Next-gen gaming performance.'}
+];
+
+function retailerSearchUrl(retailer, productName){
+  const q = encodeURIComponent(productName);
+  switch(retailer){
+    case 'amazon': return 'https://www.amazon.com/s?k=' + q;
+    case 'bestbuy': return 'https://www.bestbuy.com/site/searchpage.jsp?st=' + q;
+    case 'walmart': return 'https://www.walmart.com/search?q=' + q;
+    case 'target': return 'https://www.target.com/s?searchTerm=' + q;
+    case 'ebay': return 'https://www.ebay.com/sch/i.html?_nkw=' + q;
+    case 'newegg': return 'https://www.newegg.com/p/pl?d=' + q;
+    case 'autozone': return 'https://www.autozone.com/search?searchText=' + q;
+    case 'freshdirect': return 'https://www.freshdirect.com/catalog/search.jsp?search=' + q;
+    default: return '#';
+  }
+}
+
+function renderProducts(){
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = '';
+  PRODUCTS.forEach(p=>{
+    const div = document.createElement('div');
+    div.className = 'product card';
+    div.innerHTML = '<img src="'+p.img+'" alt="'+p.title+'"/><h4 style="margin:8px 0 4px 0">'+p.title+'</h4><div style="color:#64748b">'+p.excerpt+'</div><div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center"><strong>'+p.price+'</strong><div><button class="small-btn" onclick="viewProduct(\\''+p.id+'\\')">View</button> <button class="btn" onclick="affiliateClick(\\''+p.id+'\\')">Buy</button></div></div>';
+    grid.appendChild(div);
+  });
+  const top = document.getElementById('topPicks');
+  top.innerHTML = PRODUCTS.map(p=>'<li>'+p.title+' — '+p.price+'</li>').join('');
+}
+renderProducts();
+
+function saveClickRecord(rec){
+  try{
+    const arr = JSON.parse(localStorage.getItem('hw_clicks') || '[]');
+    arr.push(rec);
+    localStorage.setItem('hw_clicks', JSON.stringify(arr));
+  }catch(e){}
+}
+
+function affiliateClick(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  const url = retailerSearchUrl('amazon', p.title);
+  saveClickRecord({id: p.id, title: p.title, retailer: 'amazon', ts: new Date().toISOString()});
+  window.open(url, '_blank', 'noopener');
+}
+
+function viewProduct(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  const w = window.open('', '_blank', 'noopener');
+  w.document.write('<html><head><title>'+p.title+'</title><meta name="viewport" content="width=device-width,initial-scale=1"/><style>body{font-family:system-ui;padding:20px}button{background: #27A844;color:#fff;padding:8px;border-radius:8px;border:0;margin-right:6px}</style></head><body><h2>'+p.title+'</h2><p>'+p.excerpt+'</p><p><strong>'+p.price+'</strong></p><p id="retailers"></p></body></html>');
+  setTimeout(()=>{
+    const html = ['amazon','bestbuy','walmart','target','ebay','newegg','autozone','freshdirect'].map(r=>'<button onclick="window.open(\\''+retailerSearchUrl(r, p.title)+'\\',\\'_blank\\')">'+r+'</button>').join(' ');
+    w.document.getElementById('retailers').innerHTML = html;
+  }, 200);
+}
+
+document.addEventListener('click', function(e){
+}, false);
+
+document.getElementById('exportClicks').addEventListener('click', ()=>{
+  const arr = JSON.parse(localStorage.getItem('hw_clicks') || '[]');
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(arr, null, 2));
+  const dl = document.createElement('a');
+  dl.setAttribute('href', dataStr);
+  dl.setAttribute('download', 'hw_clicks.json');
+  dl.click();
+});
+
+document.getElementById('findBtn').addEventListener('click', ()=>{
+  const budget = document.getElementById('budget').value.trim();
+  const usecase = document.getElementById('usecase').value;
+  let minB=0,maxB=999999;
+  if(budget.includes('-')){
+    const p = budget.split('-').map(s=>parseInt(s.trim())).filter(Boolean);
+    if(p.length===2){minB=p[0];maxB=p[1];}
+  } else if(budget){const n=parseInt(budget); if(!isNaN(n)){minB=Math.max(0,n-Math.round(n*0.3)); maxB=n+Math.round(n*0.3);}}
+  const mid=(minB+maxB)/2;
+  const scored = PRODUCTS.map(function(p){ var score=100-Math.abs(mid-Number(p.price.replace(/[^0-9\\.]/g,'')))/5; if(usecase==='gaming'&&p.title.toLowerCase().includes('playstation')) score+=18; if(usecase==='video'&&p.title.toLowerCase().includes('macbook')) score+=15; var obj = Object.assign({}, p); obj.score = Math.round(score); return obj; }).sort(function(a,b){return b.score-a.score;});
+  var out = document.getElementById('pickerResults');
+  out.innerHTML = '<ul style="list-style:none;padding:0;margin:0>'+scored.slice(0,5).map(function(s){return '<li style=\"display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eef2f7\"><div><strong>'+s.title+'</strong><div style=\"color:#64748b\">'+s.excerpt+'</div></div><div style=\"text-align:right\"><div style=\"font-weight:700\">'+s.price+'</div><div style=\"font-size:12px;color:#94a3b8\">score:'+s.score+'</div><div style=\"margin-top:6px\"><button class=\"small-btn\" onclick=\"affiliateClick(\\''+s.id+'\\')\">Buy</button></div></div></li>';}).join('')+'</ul>';
+});
+
+function showCookie(){ var b = document.getElementById('cookieBanner'); var consent = localStorage.getItem('hw_cookie_consent'); if(consent==='true'){ b.style.display='none'; loadGA(); } else if(consent==='false'){ b.style.display='none'; } else { b.style.display='block'; }}
+document.getElementById('acceptCookies').addEventListener('click', function(){ localStorage.setItem('hw_cookie_consent','true'); document.getElementById('cookieBanner').style.display='none'; loadGA(); });
+document.getElementById('rejectCookies').addEventListener('click', function(){ localStorage.setItem('hw_cookie_consent','false'); document.getElementById('cookieBanner').style.display='none'; });
+showCookie();
+
+function loadGA(){ if(!'G-CH5H2HJXS6') return; if(window.gtag) return; var s=document.createElement('script'); s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id=G-CH5H2HJXS6'; document.head.appendChild(s); window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} window.gtag=gtag; gtag('js', new Date()); gtag('config','G-CH5H2HJXS6', {'anonymize_ip': true}); }
+</script>
+</body>
+</html>
