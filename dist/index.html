@@ -1,278 +1,155 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>HW CompareTech</title>
-  <meta name="description" content="HW CompareTech — Smart product comparisons for tech shoppers."/>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+// ✅ HW CompareTech - Product List with Amazon Affiliate Links
+// ✅ Affiliate ID: hwcomptech5-20
 
-  <style>
-    :root { --hw-orange: #FF6A00; --hw-green: #27A844; }
-    body { font-family: system-ui, Arial, sans-serif; margin: 0; background: #f8fafc; color: #0f172a; }
-    .header { background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.05); }
-    .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-    .logo { display: flex; align-items: center; gap: 12px; }
-    .logo img { width: 56px; height: 56px; }
-    .hero { display: flex; gap: 24px; align-items: center; padding: 28px 0; }
-    .card { background: #fff; padding: 16px; border-radius: 12px; box-shadow: 0 6px 18px rgba(15,23,42,.04); }
-    .btn { background: var(--hw-orange); color: #fff; padding: 8px 12px; border-radius: 8px; border: none; cursor: pointer; }
-    .small-btn { background: var(--hw-green); color: #fff; padding: 6px 10px; border-radius: 6px; border: none; cursor: pointer; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 12px; }
-    .product img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; }
-    .footer { background: #0f172a; color: #fff; padding: 24px; margin-top: 28px; text-align: center; }
-    .cookie-banner { position: fixed; right: 16px; bottom: 16px; background: #fff; padding: 12px; border-radius: 10px; box-shadow: 0 6px 24px rgba(2,6,23,.2); max-width: 360px; }
-    .export-panel { position: fixed; left: 16px; bottom: 16px; background: #fff; padding: 10px; border-radius: 10px; box-shadow: 0 6px 24px rgba(2,6,23,.08); }
-  </style>
-</head>
+const products = [
+  // 📱 SMARTPHONES
+  {
+    id: 'p1',
+    name: 'Apple iPhone 15 Pro',
+    category: 'Smartphones',
+    price: '$999',
+    image: 'https://m.media-amazon.com/images/I/81c50PU+FVL._AC_SX522_.jpg',
+    link: 'https://www.amazon.com/s?k=iphone+15+pro&tag=hwcomptech5-20'
+  },
+  {
+    id: 'p2',
+    name: 'Samsung Galaxy S24 Ultra',
+    category: 'Smartphones',
+    price: '$1199',
+    image: 'https://m.media-amazon.com/images/I/71HN4P-pd5L._AC_SX522_.jpg',
+    link: 'https://www.amazon.com/s?k=galaxy+s24+ultra&tag=hwcomptech5-20'
+  },
+  {
+    id: 'p3',
+    name: 'Google Pixel 9 Pro',
+    category: 'Smartphones',
+    price: '$999',
+    image: 'https://m.media-amazon.com/images/I/71wyfjZ6GeL._AC_SX522_.jpg',
+    link: 'https://www.amazon.com/s?k=google+pixel+9+pro&tag=hwcomptech5-20'
+  },
 
-<body>
-<header class="header">
-  <div class="container">
-    <div class="logo">
-      <img src="/hw-logo.svg" alt="HW CompareTech logo"/>
-      <div>
-        <h1 style="margin:0">HW CompareTech</h1>
-        <div style="font-size:13px;color:#6b7280">Smart product comparisons</div>
-      </div>
-    </div>
-  </div>
-</header>
+  // 💻 LAPTOPS
+  {
+    id: 'p4',
+    name: 'MacBook Air M2',
+    category: 'Laptops',
+    price: '$1199',
+    image: 'https://m.media-amazon.com/images/I/71jG+e7roXL._AC_SX522_.jpg',
+    link: 'https://www.amazon.com/s?k=macbook+air+m2&tag=hwcomptech5-20'
+  },
+  {
+    id: 'p5',
+    name: 'Dell XPS 13',
+    category: 'Laptops',
+    price: '$1099',
+    image: 'https://m.media-amazon.com/images/I/71w4hRybGPL._AC_SX522_.jpg',
+    link: 'https://www.amazon.com/s?k=dell+xps+13+laptop&tag=hwcomptech5-20'
+  },
+  {
+    id: 'p6',
+    name: 'ASUS ROG Zephyrus G14 Gaming Laptop',
+    category: 'Laptops',
+    price: '$1599',
+    image: 'https://m.media-amazon.com/images/I/71BZSVZkHuL._AC_SX522_.jpg',
+    link: 'https://www.amazon.com/s?k=asus+rog+g14&tag=hwcomptech5-20'
+  },
 
-<main class="container">
-  <section class="hero">
-    <div style="flex:1">
-      <h2 style="margin:0 0 8px 0">Find, compare, and buy tech you’ll love</h2>
-      <p style="margin:0 0 12px 0;color:#475569">Use the Smart Picker to find top matches for your budget and use case.</p>
+  // 🎧 HEADPHONES
+  {
+    id: 'p7',
+    name: 'Sony WH-1000XM5',
+    category: 'Headphones',
+    price: '$398',
+    image: 'https://m.media-amazon.com/images/I/51IdLeEE5-L._AC_SX466_.jpg',
+    link: 'https://www.amazon.com/s?k=sony+wh1000xm5&tag=hwcomptech5-20'
+  },
+  {
+    id: 'p8',
+    name: 'Apple AirPods Pro (2nd Gen)',
+    category: 'Headphones',
+    price: '$249',
+    image: 'https://m.media-amazon.com/images/I/61SUj2aKoEL._AC_SX522_.jpg',
+    link: 'https://www.amazon.com/s?k=airpods+pro+2&tag=hwcomptech5-20'
+  },
+  {
+    id: 'p9',
+    name: 'Bose QuietComfort 45',
+    category: 'Headphones',
+    price: '$329',
+    image: 'https://m.media-amazon.com/images/I/51Ip2O0YxPL._AC_SX522_.jpg',
+    link: 'https://www.amazon.com/s?k=bose+quietcomfort+45&tag=hwcomptech5-20'
+  },
 
-      <div class="card">
-        <div style="display:flex;gap:8px;align-items:center">
-          <input id="budget" placeholder="Budget e.g. 500-1500" style="flex:1;padding:8px;border-radius:8px;border:1px solid #e6eef6"/>
-          <select id="usecase" style="padding:8px;border-radius:8px;border:1px solid #e6eef6">
-            <option value="general">General</option>
-            <option value="gaming">Gaming</option>
-            <option value="video">Video editing</option>
-            <option value="photo">Photography</option>
-            <option value="battery">Battery life</option>
-          </select>
-          <button class="btn" id="findBtn">Find matches</button>
-        </div>
-        <div id="pickerResults" style="margin-top:12px"></div>
-      </div>
-    </div>
-    <div style="width:320px">
-      <div class="card">
-        <h4 style="margin:0 0 8px 0">Top picks</h4>
-        <ul id="topPicks" style="padding-left:18px;margin:0;color:#334155"></ul>
-      </div>
-      <div class="card" style="margin-top:12px">
-        <h4 style="margin:0 0 8px 0">Quick actions</h4>
-        <button class="small-btn" id="exportClicks">Export click log</button>
-        <a href="/contact.html"><button class="btn">Contact Us</button></a>
-      </div>
-    </div>
-  </section>
+  // 🎮 GAMING CONSOLES
+  {
+    id: 'p10',
+    name: 'PlayStation 5 Console',
+    category: 'Gaming Consoles',
+    price: '$499',
+    image: 'https://m.media-amazon.com/images/I/51OSCYlj3xL._AC_SX522_.jpg',
+    link: 'https://www.amazon.com/s?k=playstation+5&tag=hwcomptech5-20'
+  },
+  {
+    id: 'p11',
+    name: 'Xbox Series X',
+    category: 'Gaming Consoles',
+    price: '$499',
+    image: 'https://m.media-amazon.com/images/I/61JGKhqxHxL._AC_SX522_.jpg',
+    link: 'https://www.amazon.com/s?k=xbox+series+x&tag=hwcomptech5-20'
+  },
+  {
+    id: 'p12',
+    name: 'Nintendo Switch OLED',
+    category: 'Gaming Consoles',
+    price: '$349',
+    image: 'https://m.media-amazon.com/images/I/71wM9ANqnqL._AC_SX522_.jpg',
+    link: 'https://www.amazon.com/s?k=nintendo+switch+oled&tag=hwcomptech5-20'
+  },
 
-  <section>
-    <h3>Products</h3>
-    <div id="productsGrid" class="grid"></div>
-  </section>
-</main>
+  // ⌚ SMARTWATCHES
+  {
+    id: 'p13',
+    name: 'Apple Watch Series 9',
+    category: 'Smartwatches',
+    price: '$399',
+    image: 'https://m.media-amazon.com/images/I/71Z0O4cWIEL._AC_SX522_.jpg',
+    link: 'https://www.amazon.com/s?k=apple+watch+series+9&tag=hwcomptech5-20'
+  },
+  {
+    id: 'p14',
+    name: 'Samsung Galaxy Watch 6',
+    category: 'Smartwatches',
+    price: '$299',
+    image: 'https://m.media-amazon.com/images/I/71o2Po9triL._AC_SX522_.jpg',
+    link: 'https://www.amazon.com/s?k=galaxy+watch+6&tag=hwcomptech5-20'
+  },
 
-<footer class="footer">
-  <div>HW CompareTech — Trusted product comparisons</div>
-  <div style="font-size:12px;margin-top:8px;color:rgba(255,255,255,0.8)">
-    Affiliate disclosure: this site uses affiliate links. We may earn a commission for purchases made through links.
-  </div>
-</footer>
-
-<!-- Cookie Consent -->
-<div id="cookieBanner" class="cookie-banner" style="display:none">
-  <div style="font-size:14px;margin-bottom:8px">
-    HW CompareTech uses cookies and analytics. Accept to enable analytics.
-  </div>
-  <div style="display:flex;gap:8px;justify-content:flex-end">
-    <button id="rejectCookies" style="padding:6px 10px;border-radius:8px;border:1px solid #e6edf3;background:#fff">Reject</button>
-    <button id="acceptCookies" class="small-btn">Accept</button>
-  </div>
-</div>
-
-<div class="export-panel">
-  <div style="font-size:12px;color:#334155;margin-bottom:6px">Local click log</div>
-  <div style="font-size:12px;color:#64748b">Clicks are stored in your browser and can be exported.</div>
-</div>
-
-<script>
-// Basic Product List
-const PRODUCTS = [
-  {id:'p1', title:'iPhone 15 Pro', price:'$999', img:'https://m.media-amazon.com/images/I/61SN5HhE7sL._AC_SX466_.jpg', excerpt:'A17 Pro chip, titanium design.', category:'Smartphones'},
-  {id:'p2', title:'Samsung Galaxy S24 Ultra', price:'$1199', img:'https://m.media-amazon.com/images/I/71Sk-SJ3YcL._AC_SX466_.jpg', excerpt:'200MP camera, S-Pen support.', category:'Smartphones'},
-  {id:'p3', title:'MacBook Air M2', price:'$1199', img:'https://m.media-amazon.com/images/I/71f5Eu5lJSL._AC_SX466_.jpg', excerpt:'Super thin, M2 chip.', category:'Laptops'},
-  {id:'p4', title:'Dell XPS 13', price:'$1099', img:'https://m.media-amazon.com/images/I/61G9s4oQXzL._AC_SX466_.jpg', excerpt:'Ultra-portable Windows laptop.', category:'Laptops'},
-  {id:'p5', title:'Sony WH-1000XM5', price:'$398', img:'https://m.media-amazon.com/images/I/61P1nS4UOKL._AC_SX466_.jpg', excerpt:'Industry-leading noise cancelling.', category:'Headphones'},
-  {id:'p6', title:'Bose QuietComfort 45', price:'$329', img:'https://m.media-amazon.com/images/I/61Ip2O0YxPL._AC_SX466_.jpg', excerpt:'Lightweight comfort & clear audio.', category:'Headphones'},
-  {id:'p7', title:'PlayStation 5', price:'$499', img:'https://m.media-amazon.com/images/I/51OSCYlj3xL._AC_SX466_.jpg', excerpt:'Next-gen gaming console.', category:'Gaming Consoles'},
-  {id:'p8', title:'Xbox Series X', price:'$499', img:'https://m.media-amazon.com/images/I/61JGKhqxHxL._AC_SX466_.jpg', excerpt:'4K gaming, GamePass ready.', category:'Gaming Consoles'},
+  // 📺 TVs & MONITORS
+  {
+    id: 'p15',
+    name: 'Samsung 55" 4K Smart TV',
+    category: 'TVs',
+    price: '$599',
+    image: 'https://m.media-amazon.com/images/I/71RiQZ0T8QL._AC_SX522_.jpg',
+    link: 'https://www.amazon.com/s?k=samsung+55+inch+4k+tv&tag=hwcomptech5-20'
+  },
+  {
+    id: 'p16',
+    name: 'LG 48" OLED Smart TV',
+    category: 'TVs',
+    price: '$999',
+    image: 'https://m.media-amazon.com/images/I/71Ydpx5ZTAL._AC_SX522_.jpg',
+    link: 'https://www.amazon.com/s?k=lg+oled+tv&tag=hwcomptech5-20'
+  },
+  {
+    id: 'p17',
+    name: 'ASUS 27" 165Hz Gaming Monitor',
+    category: 'Monitors',
+    price: '$299',
+    image: 'https://m.media-amazon.com/images/I/81zA4F6I8zL._AC_SX522_.jpg',
+    link: 'https://www.amazon.com/s?k=asus+gaming+monitor&tag=hwcomptech5-20'
+  }
 ];
 
-// Build Amazon Affiliate URL
-function getAmazonUrl(productName) {
-  return `https://www.amazon.com/s?k=${encodeURIComponent(productName)}&tag=hwcomptech5-20`;
-}
-
-// Render Products on Page
-function renderProducts() {
-  const grid = document.getElementById('productsGrid');
-  grid.innerHTML = '';
-
-  PRODUCTS.forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'product card';
-    div.innerHTML = `
-      <img src="${p.img}" alt="${p.title}"/>
-      <h4 style="margin:8px 0 4px 0">${p.title}</h4>
-      <div style="color:#64748b">${p.excerpt}</div>
-      <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
-        <strong>${p.price}</strong>
-        <div>
-          <button class="small-btn" onclick="viewProduct('${p.id}')">View</button>
-          <button class="btn" onclick="buyProduct('${p.id}')">Buy</button>
-        </div>
-      </div>
-    `;
-    grid.appendChild(div);
-  });
-
-  // Update Top Picks
-  document.getElementById('topPicks').innerHTML =
-    PRODUCTS.map(p => `<li>${p.title} — ${p.price}</li>`).join('');
-}
-
-// Buy product → open Amazon via affiliate link
-function buyProduct(id) {
-  const p = PRODUCTS.find(x => x.id === id);
-  if (!p) return;
-  saveClick({id, title: p.title, ts: new Date().toISOString(), retailer: 'amazon'});
-  window.open(getAmazonUrl(p.title), '_blank');
-}
-
-// View product details in popup window
-function viewProduct(id) {
-  const p = PRODUCTS.find(x => x.id === id);
-  if (!p) return;
-  const w = window.open('', '_blank');
-  w.document.write(`
-    <html>
-    <head>
-      <title>${p.title}</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1"/>
-      <style>
-        body { font-family: system-ui; padding: 20px; }
-        button { background: #27A844; color:#fff; padding:8px; border:0; border-radius:8px; margin-right:6px; }
-      </style>
-    </head>
-    <body>
-      <h2>${p.title}</h2>
-      <p>${p.excerpt}</p>
-      <p><strong>${p.price}</strong></p>
-      <button onclick="window.open('${getAmazonUrl(p.title)}','_blank')">Buy on Amazon</button>
-    </body>
-    </html>
-  `);
-}
-// Save click events locally
-function saveClick(rec) {
-  try {
-    const logs = JSON.parse(localStorage.getItem('hw_clicks') || '[]');
-    logs.push(rec);
-    localStorage.setItem('hw_clicks', JSON.stringify(logs));
-  } catch (e) {}
-}
-
-// Export click logs
-document.getElementById('exportClicks').addEventListener('click', () => {
-  const logs = JSON.parse(localStorage.getItem('hw_clicks') || '[]');
-  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(logs, null, 2));
-  const dl = document.createElement('a');
-  dl.setAttribute('href', dataStr);
-  dl.setAttribute('download', 'hw_clicks.json');
-  dl.click();
-});
-
-// SMART PICKER: Find matches based on budget + use case
-document.getElementById('findBtn').addEventListener('click', () => {
-  const budget = document.getElementById('budget').value.trim();
-  const usecase = document.getElementById('usecase').value;
-
-  let minB = 0, maxB = 9999;
-  if (budget.includes('-')) {
-    const p = budget.split('-').map(x => parseInt(x.trim())).filter(Boolean);
-    if (p.length === 2) { minB = p[0]; maxB = p[1]; }
-  }
-
-  const scored = PRODUCTS.map(prod => {
-    const priceNum = Number(prod.price.replace(/[^0-9.]/g, ''));
-    let score = 100 - Math.abs((minB + maxB) / 2 - priceNum);
-    if (usecase === 'gaming' && prod.title.toLowerCase().includes('playstation')) score += 15;
-    return { ...prod, score: Math.round(score) };
-  }).sort((a, b) => b.score - a.score);
-
-  const results = scored.slice(0, 5).map(s => `
-    <li style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #eceff3">
-      <div><strong>${s.title}</strong><div style="color:#64748b">${s.excerpt}</div></div>
-      <div style="text-align:right">
-        <div>${s.price}</div>
-        <div style="font-size:12px;color:#94a3b8">score: ${s.score}</div>
-        <button class="small-btn" onclick="buyProduct('${s.id}')">Buy</button>
-      </div>
-    </li>`).join('');
-
-  document.getElementById('pickerResults').innerHTML = `<ul style="list-style:none;margin:0;padding:0">${results}</ul>`;
-});
-
-// Cookie Consent + Google Analytics
-function showCookieBanner() {
-  const consent = localStorage.getItem('hw_cookie_consent');
-  if (consent === 'true') {
-    loadGA();
-  } else if (consent === null) {
-    document.getElementById('cookieBanner').style.display = 'block';
-  }
-}
-
-document.getElementById('acceptCookies').addEventListener('click', function() {
-  localStorage.setItem('hw_cookie_consent', 'true');
-  document.getElementById('cookieBanner').style.display = 'none';
-  loadGA();
-});
-
-document.getElementById('rejectCookies').addEventListener('click', function() {
-  localStorage.setItem('hw_cookie_consent', 'false');
-  document.getElementById('cookieBanner').style.display = 'none';
-});
-
-function loadGA() {
-  const GA_ID = 'G-CH5H2HJXS6';
-  if (!GA_ID || window.gtag) return;
-  const s = document.createElement('script');
-  s.async = true;
-  s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
-  document.head.appendChild(s);
-
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  window.gtag = gtag;
-  gtag('js', new Date());
-  gtag('config', GA_ID, { anonymize_ip: true });
-}
-
-// Initial render
-renderProducts();
-showCookieBanner();
-</script>
-
-<!-- ✅ Load product data from separate file (optional if using products.js) -->
-<script src="assets/js/products.js"></script>
-
-</body>
-</html>
+// Make available globally
+window.products = products;
