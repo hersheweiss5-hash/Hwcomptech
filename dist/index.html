@@ -8,7 +8,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <style>
     :root { --hw-orange: #FF6A00; --hw-green: #27A844; }
-    body { font-family: system-ui, Arial, Helvetica, sans-serif; margin:0; background:#f8fafc; color:#0f172a; }
+    body { font-family: system-ui, Arial, sans-serif; margin:0; background:#f8fafc; color:#0f172a; }
     .header { background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.05); }
     .container { max-width:1100px; margin:0 auto; padding:20px; }
     .logo { display:flex; align-items:center; gap:12px; }
@@ -18,268 +18,90 @@
     .btn { background:var(--hw-orange); color:#fff; padding:8px 12px; border-radius:8px; border:none; cursor:pointer; }
     .small-btn { background:var(--hw-green); color:#fff; padding:6px 10px; border-radius:6px; border:none; cursor:pointer; }
     .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:12px; }
-    .product img { width:100%; height:160px; object-fit:cover; border-radius:8px; }
-    .footer { background:#0f172a; color:#fff; padding:24px; margin-top:28px; text-align:center; }
-    .cookie-banner { position:fixed; right:16px; bottom:16px; background:#fff; padding:12px; border-radius:10px; box-shadow:0 6px 24px rgba(2,6,23,.2); max-width:360px; }
-    .export-panel { position:fixed; left:16px; bottom:16px; background:#fff; padding:10px; border-radius:10px; box-shadow:0 6px 24px rgba(2,6,23,.08); }
     .product-card { background:#fff; padding:12px; border-radius:10px; box-shadow:0 4px 10px rgba(2,6,23,.04); }
+    .product-card img { width:100%; height:160px; object-fit:cover; border-radius:8px; }
+    .footer { background:#0f172a; color:#fff; padding:24px; margin-top:28px; text-align:center; }
     a { text-decoration: none; }
   </style>
 </head>
 <body>
-  <header class="header">
-    <div class="container">
-      <div class="logo">
-        <img src="/hw-logo.svg" alt="HW CompareTech logo"/>
-        <div>
-          <h1 style="margin:0">HW CompareTech</h1>
-          <div style="font-size:13px;color:#6b7280">Smart product comparisons</div>
-        </div>
+<header class="header">
+  <div class="container">
+    <div class="logo">
+      <img src="/hw-logo.svg" alt="HW CompareTech logo"/>
+      <div>
+        <h1 style="margin:0">HW CompareTech</h1>
+        <div style="font-size:13px;color:#6b7280">Smart product comparisons</div>
       </div>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="hero">
-      <div style="flex:1">
-        <h2 style="margin:0 0 8px 0">Find, compare, and buy tech you’ll love</h2>
-        <p style="margin:0 0 12px 0;color:#475569">Use the Smart Picker to find top matches for your budget and use case.</p>
-
-        <div class="card">
-          <div style="display:flex;gap:8px;align-items:center">
-            <input id="budget" placeholder="Budget e.g. 500-1500" style="flex:1;padding:8px;border-radius:8px;border:1px solid #e6eef6"/>
-            <select id="usecase" style="padding:8px;border-radius:8px;border:1px solid #e6eef6">
-              <option value="general">General</option>
-              <option value="gaming">Gaming</option>
-              <option value="video">Video editing</option>
-              <option value="photo">Photography</option>
-              <option value="battery">Battery life</option>
-            </select>
-            <button class="btn" id="findBtn">Find matches</button>
-          </div>
-          <div id="pickerResults" style="margin-top:12px"></div>
-        </div>
-      </div>
-
-      <div style="width:320px">
-        <div class="card">
-          <h4 style="margin:0 0 8px 0">Top picks</h4>
-          <ul id="topPicks" style="padding-left:18px;margin:0;color:#334155"></ul>
-        </div>
-        <div class="card" style="margin-top:12px">
-          <h4 style="margin:0 0 8px 0">Quick actions</h4>
-          <button class="small-btn" id="exportClicks">Export click log</button>
-          <a href="/contact.html" style="display:inline-block;margin-top:8px"><button style="margin-top:6px" class="btn">Contact Us</button></a>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h3>Products</h3>
-      <div id="productsGrid" class="grid"></div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div>HW CompareTech — Trusted product comparisons</div>
-    <div style="font-size:12px;margin-top:8px;color:rgba(255,255,255,0.8)">
-      Affiliate disclosure: this site uses affiliate links. We may earn a commission for purchases made through links.
-    </div>
-  </footer>
-
-  <div id="cookieBanner" class="cookie-banner" style="display:none">
-    <div style="font-size:14px;margin-bottom:8px">HW CompareTech uses cookies and analytics. Accept to enable analytics.</div>
-    <div style="display:flex;gap:8px;justify-content:flex-end">
-      <button id="rejectCookies" style="padding:6px 10px;border-radius:8px;border:1px solid #e6edf3;background:#fff">Reject</button>
-      <button id="acceptCookies" class="small-btn">Accept</button>
     </div>
   </div>
+</header>
 
-  <div class="export-panel">
-    <div style="font-size:12px;color:#334155;margin-bottom:6px">Local click log</div>
-    <div style="font-size:12px;color:#64748b">Clicks are stored in your browser and can be exported.</div>
-  </div>
+<main class="container">
+  <section class="hero">
+    <div style="flex:1">
+      <h2>Find, compare, and buy tech you’ll love</h2>
+      <p style="color:#475569">Use the Smart Picker to find top matches for your budget and use case.</p>
+      <div class="card">
+        <div style="display:flex;gap:8px;">
+          <input id="budget" placeholder="Budget e.g. 500-1500" style="flex:1;padding:8px;border-radius:8px;border:1px solid #ddd"/>
+          <select id="usecase" style="padding:8px;border-radius:8px;border:1px solid #ddd">
+            <option value="general">General</option>
+            <option value="gaming">Gaming</option>
+            <option value="video">Video editing</option>
+            <option value="photo">Photography</option>
+            <option value="battery">Battery life</option>
+          </select>
+          <button class="btn" id="findBtn">Find</button>
+        </div>
+        <div id="pickerResults" style="margin-top:12px"></div>
+      </div>
+    </div>
+    <div style="width:320px">
+      <div class="card">
+        <h4>Top picks</h4>
+        <ul id="topPicks" style="padding-left:18px;"></ul>
+      </div>
+    </div>
+  </section>
 
-  <!-- Load product data (external file) -->
-  <script src="assets/js/products.js"></script>
+  <section>
+    <h3>Products</h3>
+    <div id="productsGrid" class="grid"></div>
+  </section>
+</main>
 
-  <!-- Product rendering + affiliate actions -->
-  <script>
-  (function(){
-    // ensure products.js loaded
-    if (!window.products || !Array.isArray(window.products)) {
-      console.warn("products.js not loaded or products missing");
-      // still leave page functioning
-      window.products = window.products || [];
-    }
-
-    // Helper: build Amazon search URL with your tag
-    function getAmazonUrl(name){
-      return 'https://www.amazon.com/s?k=' + encodeURIComponent(name) + '&tag=hwcomptech5-20';
-    }
-
-    // Render product cards into #productsGrid
-    function renderProducts(){
-      const grid = document.getElementById('productsGrid');
-      if(!grid) return;
-      grid.innerHTML = '';
-      window.products.forEach(p => {
-        const div = document.createElement('div');
-        div.className = 'product-card';
-        div.style.display = 'flex';
-        div.style.flexDirection = 'column';
-        div.innerHTML = `
-          <img src="${p.image}" alt="${p.name}" style="width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:8px" />
-          <h4 style="margin:0 0 6px 0">${p.name}</h4>
-          <div style="color:#64748b;margin-bottom:8px">${p.category}</div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
-            <strong>${p.price || ''}</strong>
-            <div>
-              <button class="small-btn" onclick="viewProduct('${p.id}')">View</button>
-              <button class="btn" onclick="buyProduct('${p.id}')">Buy</button>
-            </div>
-          </div>
-        `;
-        grid.appendChild(div);
-      });
-
-      // top picks list
-      const top = document.getElementById('topPicks');
-      if(top){
-        top.innerHTML = window.products.slice(0,6).map(p => '<li>'+p.name+' — '+(p.price||'')+'</li>').join('');
-      }
-    }
-
-    // Save click events locally
-    function saveClick(rec){
-      try{
-        const arr = JSON.parse(localStorage.getItem('hw_clicks') || '[]');
-        arr.push(rec);
-        localStorage.setItem('hw_clicks', JSON.stringify(arr));
-      }catch(e){}
-    }
-
-    // Global actions used by buttons
-    window.buyProduct = function(id){
-      const p = window.products.find(x => x.id === id);
-      if(!p) return;
-      saveClick({id:p.id,title:p.name,retailer:'amazon',ts:new Date().toISOString()});
-      window.open(getAmazonUrl(p.name), '_blank', 'noopener');
-    };
-
-    window.viewProduct = function(id){
-      const p = window.products.find(x => x.id === id);
-      if(!p) return;
-      const w = window.open('', '_blank', 'noopener');
-      w.document.write(`
-        <!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>${p.name}</title>
-        <style>body{font-family:system-ui;padding:20px}button{background:#27A844;color:#fff;padding:8px;border-radius:8px;border:0;margin-right:6px}</style>
-        </head><body>
-        <h2>${p.name}</h2>
-        <p>${p.category}</p>
-        <p>${p.price || ''}</p>
-        <p>${p.excerpt || ''}</p>
-        <p><button onclick="window.open('${getAmazonUrl(p.name)}','_blank')">Buy on Amazon</button></p>
-        </body></html>
-      `);
-    };
-
-    // Export click logs
-    document.getElementById('exportClicks').addEventListener('click', function(){
-      const arr = JSON.parse(localStorage.getItem('hw_clicks') || '[]');
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(arr, null, 2));
-      const dl = document.createElement('a');
-      dl.setAttribute('href', dataStr);
-      dl.setAttribute('download', 'hw_clicks.json');
-      dl.click();
-    });
-
-    // Smart picker (simple scoring)
-    document.getElementById('findBtn').addEventListener('click', function(){
-      const budgetText = document.getElementById('budget').value.trim();
-      const usecase = document.getElementById('usecase').value;
-      let minB = 0, maxB = 999999;
-      if (budgetText.includes('-')) {
-        const parts = budgetText.split('-').map(s=>parseInt(s.trim())).filter(Boolean);
-        if(parts.length===2){ minB = parts[0]; maxB = parts[1]; }
-      } else if(budgetText){
-        const n = parseInt(budgetText);
-        if(!isNaN(n)){ minB = Math.max(0, n - Math.round(n*0.3)); maxB = n + Math.round(n*0.3); }
-      }
-      const mid = (minB + maxB)/2;
-      const scored = window.products.map(function(p){
-        const priceNum = Number((p.price || '').replace(/[^0-9.]/g,'')) || mid;
-        let score = 100 - Math.abs(mid - priceNum)/5;
-        if(usecase==='gaming' && p.category.toLowerCase().includes('gaming')) score += 15;
-        if(usecase==='video' && p.name.toLowerCase().includes('macbook')) score += 12;
-        return Object.assign({}, p, {score: Math.round(score)});
-      }).sort((a,b)=>b.score-a.score);
-      const out = document.getElementById('pickerResults');
-      if(!out) return;
-      out.innerHTML = '<ul style="list-style:none;padding:0;margin:0">' + scored.slice(0,5).map(function(s){
-        return '<li style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eef2f7"><div><strong>'+s.name+'</strong><div style="color:#64748b">'+(s.excerpt||'')+'</div></div><div style="text-align:right"><div style="font-weight:700">'+(s.price||'')+'</div><div style="font-size:12px;color:#94a3b8">score:'+s.score+'</div><div style="margin-top:6px"><button class="small-btn" onclick="buyProduct(\\''+s.id+'\\')">Buy</button></div></div></li>';
-      }).join('') + '</ul>';
-    });
-
-    // Cookie banner & GA
-    function loadGA(){
-      const GA_ID = 'G-CH5H2HJXS6';
-      if(!GA_ID || window.gtag) return;
-      var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID; document.head.appendChild(s);
-      window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} window.gtag = gtag;
-      gtag('js', new Date()); gtag('config', GA_ID, { anonymize_ip: true });
-    }
-
-    function showCookie(){
-      const consent = localStorage.getItem('hw_cookie_consent');
-      if(consent === 'true') { document.getElementById('cookieBanner').style.display = 'none'; loadGA(); }
-      else if(consent === 'false') { document.getElementById('cookieBanner').style.display = 'none'; }
-      else { document.getElementById('cookieBanner').style.display = 'block'; }
-    }
-
-    document.getElementById('acceptCookies').addEventListener('click', function(){ localStorage.setItem('hw_cookie_consent','true'); document.getElementById('cookieBanner').style.display='none'; loadGA(); });
-    document.getElementById('rejectCookies').addEventListener('click', function(){ localStorage.setItem('hw_cookie_consent','false'); document.getElementById('cookieBanner').style.display='none'; });
-
-    // initial render
-    renderProducts();
-    showCookie();
-  })();
-  </script>
-<!-- Load product data -->
+<!-- ✅ Load product list -->
 <script src="assets/js/products.js"></script>
 
-<!-- Render products + handle affiliate links -->
-  <!-- ✅ Load product data -->
-  <script src="assets/js/products.js"></script>
-
-  <!-- ✅ Render Products -->
-  <script>
-  <!-- ✅ Load product data ONCE -->
-<script src="assets/js/products.js"></script>
-
-<!-- ✅ Render product cards -->
+<!-- ✅ Product Renderer Script -->
 <script>
-  function renderProducts() {
-    const grid = document.getElementById("productsGrid");
-    if (!grid || !Array.isArray(window.products)) return;
-    grid.innerHTML = "";
-
-    window.products.forEach(p => {
-      const card = document.createElement("div");
-      card.className = "product-card";
-      card.innerHTML = `
-        <img src="${p.image}" alt="${p.name}" style="width:100%;height:160px;object-fit:cover;border-radius:8px" />
-        <h4>${p.name}</h4>
-        <p>${p.category}</p>
-        <p><strong>${p.price}</strong></p>
-        <a href="${p.link}" target="_blank" rel="noopener noreferrer"><button class="btn">Buy on Amazon</button></a>
-      `;
-      grid.appendChild(card);
-    });
+  function getAmazonUrl(name){
+    return 'https://www.amazon.com/s?k=' + encodeURIComponent(name) + '&tag=hwcomptech5-20';
   }
 
-  document.addEventListener("DOMContentLoaded", renderProducts);
+  function renderProducts(){
+    const grid = document.getElementById('productsGrid');
+    grid.innerHTML = '';
+    products.forEach(p => {
+      grid.innerHTML += `
+        <div class="product-card">
+          <img src="${p.image}" alt="${p.name}">
+          <h4>${p.name}</h4>
+          <p style="color:#64748b">${p.category}</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+            <strong>${p.price}</strong>
+            <a href="${p.link}" target="_blank" rel="noopener noreferrer">
+              <button class="btn">Buy</button>
+            </a>
+          </div>
+        </div>
+      `;
+    });
+    document.getElementById('topPicks').innerHTML = products.slice(0,6).map(p => `<li>${p.name} — ${p.price}</li>`).join('');
+  }
+  renderProducts();
 </script>
+
 </body>
 </html>
