@@ -250,44 +250,48 @@
 <script src="assets/js/products.js"></script>
 
 <!-- Render products + handle affiliate links -->
-<script>
-(function(){
-  if (!window.products || !Array.isArray(window.products)) {
-    console.warn("products.js not loaded properly");
-    window.products = [];
-  }
+  <!-- ✅ Load product data -->
+  <script src="assets/js/products.js"></script>
 
-  function getAmazonUrl(name){
-    return 'https://www.amazon.com/s?k=' + encodeURIComponent(name) + '&tag=hwcomptech5-20';
-  }
+  <!-- ✅ Render Products -->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("productsGrid");
 
-  function renderProducts(){
-    const grid = document.getElementById('productsGrid');
-    if(!grid) return;
-    grid.innerHTML = '';
-    window.products.forEach(p => {
-      const div = document.createElement('div');
-      div.className = 'product-card';
-      div.innerHTML = `
-        <img src="${p.image}" alt="${p.name}"/>
-        <h4>${p.name}</h4>
-        <p>${p.category}</p>
-        <p>${p.price}</p>
-        <a href="${p.link}" target="_blank">
-          <button class="btn">Buy on Amazon</button>
+    if (!container) {
+      console.warn("⚠️ productsGrid not found in HTML");
+      return;
+    }
+
+    // ✅ Clear products first
+    container.innerHTML = "";
+
+    // ✅ Ensure products array exists
+    if (!window.products || !products.length) {
+      console.warn("⚠️ No products found in products.js");
+      return;
+    }
+
+    // ✅ Loop & create product cards
+    products.forEach(p => {
+      const card = document.createElement("div");
+      card.classList.add("product-card");
+      card.innerHTML = `
+        <img src="${p.image}" alt="${p.name}" style="width:100%;height:160px;object-fit:cover;border-radius:8px" />
+        <h4 style="margin:8px 0 4px 0">${p.name}</h4>
+        <p style="color:#64748b">${p.category}</p>
+        <p><strong>${p.price}</strong></p>
+        <a href="${p.link}" target="_blank" rel="noopener noreferrer">
+          <button class="btn">View on Amazon</button>
         </a>
       `;
-      grid.appendChild(div);
+      container.appendChild(card);
     });
-  }
+  });
+  </script>
 
-  // Make globally available
-  window.renderProducts = renderProducts;
-
-  // Automatically run on page load
-  renderProducts();
-})();
-</script>
+</body>
+</html>
 
 </body>
 </html>
