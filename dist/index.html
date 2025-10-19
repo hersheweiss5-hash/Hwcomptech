@@ -246,6 +246,48 @@
     showCookie();
   })();
   </script>
+<!-- Load product data -->
+<script src="assets/js/products.js"></script>
+
+<!-- Render products + handle affiliate links -->
+<script>
+(function(){
+  if (!window.products || !Array.isArray(window.products)) {
+    console.warn("products.js not loaded properly");
+    window.products = [];
+  }
+
+  function getAmazonUrl(name){
+    return 'https://www.amazon.com/s?k=' + encodeURIComponent(name) + '&tag=hwcomptech5-20';
+  }
+
+  function renderProducts(){
+    const grid = document.getElementById('productsGrid');
+    if(!grid) return;
+    grid.innerHTML = '';
+    window.products.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'product-card';
+      div.innerHTML = `
+        <img src="${p.image}" alt="${p.name}"/>
+        <h4>${p.name}</h4>
+        <p>${p.category}</p>
+        <p>${p.price}</p>
+        <a href="${p.link}" target="_blank">
+          <button class="btn">Buy on Amazon</button>
+        </a>
+      `;
+      grid.appendChild(div);
+    });
+  }
+
+  // Make globally available
+  window.renderProducts = renderProducts;
+
+  // Automatically run on page load
+  renderProducts();
+})();
+</script>
 
 </body>
 </html>
