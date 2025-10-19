@@ -99,7 +99,7 @@ const PRODUCTS = [
 function retailerSearchUrl(retailer, productName){
   const q = encodeURIComponent(productName);
   switch(retailer){
-    case 'amazon': return 'https://www.amazon.com/s?k=' + q;
+    case 'amazon': return 'https://www.amazon.com/s?k=&tag=hwcomptech5-20&tag=hwcomptech5-20' + q;
     case 'bestbuy': return 'https://www.bestbuy.com/site/searchpage.jsp?st=' + q;
     case 'walmart': return 'https://www.walmart.com/search?q=' + q;
     case 'target': return 'https://www.target.com/s?searchTerm=' + q;
