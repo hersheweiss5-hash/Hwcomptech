@@ -177,38 +177,6 @@ function viewProduct(id){
     });
   })();
 </script>
-<!-- Load product data -->
-<script src="assets/js/products.js"></script>
-
-<!-- Render product cards on the page (uses 'products' array from products.js) -->
-<script>
-  (function(){
-    const container = document.getElementById("productsGrid") || document.getElementById("products");
-    if(!container){
-      console.warn("No #productsGrid or #products element found.");
-      return;
-    }
-    container.innerHTML = '';
-    if(!window.products || !products.length){
-      console.warn("No products loaded (products.js may be missing or empty).");
-      return;
-    }
-    products.forEach(p => {
-      const card = document.createElement("div");
-      card.className = "product card";
-      card.innerHTML = `
-        <img src="${p.image}" alt="${p.name}" style="width:100%;height:160px;object-fit:cover;border-radius:8px" />
-        <h4 style="margin:8px 0 4px 0">${p.name}</h4>
-        <div style="color:#64748b">${p.category}</div>
-        <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
-          <strong>${p.price}</strong>
-          <a href="${p.link}" target="_blank" rel="noopener noreferrer"><button class="btn">View on Amazon</button></a>
-        </div>
-      `;
-      container.appendChild(card);
-    });
-  })();
-</script>
 </body></html>');
   setTimeout(()=>{
     const html = ['amazon','bestbuy','walmart','target','ebay','newegg','autozone','freshdirect'].map(r=>'<button onclick="window.open(\\''+retailerSearchUrl(r, p.title)+'\\',\\'_blank\\')">'+r+'</button>').join(' ');
@@ -248,38 +216,6 @@ document.getElementById('rejectCookies').addEventListener('click', function(){ l
 showCookie();
 
 function loadGA(){ if(!'G-CH5H2HJXS6') return; if(window.gtag) return; var s=document.createElement('script'); s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id=G-CH5H2HJXS6'; document.head.appendChild(s); window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} window.gtag=gtag; gtag('js', new Date()); gtag('config','G-CH5H2HJXS6', {'anonymize_ip': true}); }
-</script>
-<!-- Load product data -->
-<script src="assets/js/products.js"></script>
-
-<!-- Render product cards on the page (uses 'products' array from products.js) -->
-<script>
-  (function(){
-    const container = document.getElementById("productsGrid") || document.getElementById("products");
-    if(!container){
-      console.warn("No #productsGrid or #products element found.");
-      return;
-    }
-    container.innerHTML = '';
-    if(!window.products || !products.length){
-      console.warn("No products loaded (products.js may be missing or empty).");
-      return;
-    }
-    products.forEach(p => {
-      const card = document.createElement("div");
-      card.className = "product card";
-      card.innerHTML = `
-        <img src="${p.image}" alt="${p.name}" style="width:100%;height:160px;object-fit:cover;border-radius:8px" />
-        <h4 style="margin:8px 0 4px 0">${p.name}</h4>
-        <div style="color:#64748b">${p.category}</div>
-        <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
-          <strong>${p.price}</strong>
-          <a href="${p.link}" target="_blank" rel="noopener noreferrer"><button class="btn">View on Amazon</button></a>
-        </div>
-      `;
-      container.appendChild(card);
-    });
-  })();
 </script>
 <!-- Load product data -->
 <script src="assets/js/products.js"></script>

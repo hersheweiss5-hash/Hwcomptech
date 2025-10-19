@@ -1,0 +1,94 @@
+// assets/js/products.js
+const products = [
+  // 📱 Smartphones
+  {
+    name: "Apple iPhone 15 Pro",
+    category: "Smartphones",
+    price: "$999",
+    image: "https://m.media-amazon.com/images/I/81C+z8kBPCL._AC_SL1500_.jpg",
+    link: "https://www.amazon.com/dp/B0CHX7XZD5?tag=hwcomptech5-20",
+  },
+  {
+    name: "Samsung Galaxy S24 Ultra",
+    category: "Smartphones",
+    price: "$1,299",
+    image: "https://m.media-amazon.com/images/I/71J8tz0UeJL._AC_SL1500_.jpg",
+    link: "https://www.amazon.com/dp/B0CSHBTCLP?tag=hwcomptech5-20",
+  },
+  {
+    name: "Google Pixel 9 Pro",
+    category: "Smartphones",
+    price: "$999",
+    image: "https://m.media-amazon.com/images/I/71u-b6fG8OL._AC_SL1500_.jpg",
+    link: "https://www.amazon.com/dp/B0D6JZKTTK?tag=hwcomptech5-20",
+  },
+
+  // 💻 Laptops
+  {
+    name: "MacBook Air M2",
+    category: "Laptops",
+    price: "$1,099",
+    image: "https://m.media-amazon.com/images/I/710TJuHTMhL._AC_SL1500_.jpg",
+    link: "https://www.amazon.com/dp/B0B3C9VZ9H?tag=hwcomptech5-20",
+  },
+  {
+    name: "Dell XPS 13 Plus",
+    category: "Laptops",
+    price: "$1,249",
+    image: "https://m.media-amazon.com/images/I/71Yv2u8JGyL._AC_SL1500_.jpg",
+    link: "https://www.amazon.com/dp/B0C1V5YN7J?tag=hwcomptech5-20",
+  },
+  {
+    name: "ASUS ROG Zephyrus G14",
+    category: "Laptops",
+    price: "$1,499",
+    image: "https://m.media-amazon.com/images/I/81NVDU5qN6L._AC_SL1500_.jpg",
+    link: "https://www.amazon.com/dp/B0CS44G1ST?tag=hwcomptech5-20",
+  },
+
+  // 🎮 Gaming Consoles
+  {
+    name: "PlayStation 5 Slim",
+    category: "Gaming Consoles",
+    price: "$499",
+    image: "https://m.media-amazon.com/images/I/61DGtVZqD-L._AC_SL1500_.jpg",
+    link: "https://www.amazon.com/dp/B0CLFXL5DT?tag=hwcomptech5-20",
+  },
+  {
+    name: "Xbox Series X",
+    category: "Gaming Consoles",
+    price: "$499",
+    image: "https://m.media-amazon.com/images/I/71NBQ2a52CL._AC_SL1500_.jpg",
+    link: "https://www.amazon.com/dp/B08H75RTZ8?tag=hwcomptech5-20",
+  },
+  {
+    name: "Nintendo Switch OLED Model",
+    category: "Gaming Consoles",
+    price: "$349",
+    image: "https://m.media-amazon.com/images/I/61-PblYntsL._AC_SL1500_.jpg",
+    link: "https://www.amazon.com/dp/B098R2K7X9?tag=hwcomptech5-20",
+  },
+
+  // 🎧 Headphones
+  {
+    name: "Sony WH-1000XM5",
+    category: "Headphones",
+    price: "$348",
+    image: "https://m.media-amazon.com/images/I/61D4Z3yKPCL._AC_SL1500_.jpg",
+    link: "https://www.amazon.com/dp/B09XS7JWHH?tag=hwcomptech5-20",
+  },
+  {
+    name: "Bose QuietComfort Ultra",
+    category: "Headphones",
+    price: "$429",
+    image: "https://m.media-amazon.com/images/I/61+Q6Rh3OQL._AC_SL1500_.jpg",
+    link: "https://www.amazon.com/dp/B0C7G8DYYL?tag=hwcomptech5-20",
+  },
+  {
+    name: "Apple AirPods Pro (2nd Gen)",
+    category: "Headphones",
+    price: "$249",
+    image: "https://m.media-amazon.com/images/I/61SUj2aKoEL._AC_SL1500_.jpg",
+    link: "https://www.amazon.com/dp/B0D2M6LQG4?tag=hwcomptech5-20",
+  },
+];
